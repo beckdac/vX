@@ -34,6 +34,7 @@ module uart_tx
                         if (i_tx_byte_rdy == 1'b1)
                             begin
                                 r_tx_busy <= 1'b1;
+                                r_tx_done <= 1'b0;
                                 r_tx_byte <= i_tx_byte;
                                 r_state <= STATE_START;
                             end
@@ -84,15 +85,13 @@ module uart_tx
                     begin
                         o_tx <= 1'b1;
 
-                        if (r_count <- (CLKS_PER_BIT-1))
+                        if (r_count < (CLKS_PER_BIT-1))
                             begin
                                 r_count <= r_count + 1;
                                 r_state <= STATE_STOP;
                             end
                         else
                             begin
-                                r_tx_done <= 1'b1;
-                                r_tx_busy <= 1'b1;
                                 r_count = 0;
                                 r_state = STATE_RESET;
                             end
@@ -100,6 +99,7 @@ module uart_tx
                 STATE_RESET:
                     begin
                         r_tx_done <= 1'b1;
+                        r_tx_busy <= 1'b0;
                         r_state <= STATE_IDLE;
                     end
 
