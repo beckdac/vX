@@ -4,7 +4,7 @@
 `timescale 10ns/10ns
 
 module uart_tb();
-    localparam CLOCK_PERIOD_NS = 20, CLKS_PER_BIT = 434, BIT_PERIOD = 43400;
+    localparam CLOCK_PERIOD_NS = 20, CLKS_PER_BIT = 434, BIT_PERIOD = 434 * 20;
 
     reg r_clk = 0;
     reg r_tx_byte_rdy = 0;
@@ -15,7 +15,6 @@ module uart_tb();
 
     task WRITE;
         input   [7:0] i_byte;
-        integer i;
         begin
             r_rx <= 1'b0;
             #(BIT_PERIOD);
