@@ -10,7 +10,7 @@ module uart_rx
     );
 
     // receiver states in one hot encoding
-    localparam STATE_IDLE=5'b00001, STATE_START=5'b00010, STATE_DATA=5'b00100, 
+    localparam  STATE_IDLE=5'b00001, STATE_START=5'b00010, STATE_DATA=5'b00100, 
                 STATE_STOP=5'b01000, STATE_RESET=5'b10000;
 
     // double registers
@@ -18,11 +18,11 @@ module uart_rx
     reg r_rx_data = 1'b1;
 
     // internals
-    reg [7:0] r_count = 0;
+    reg [13:0] r_count = 0;     // 14 bit number is 16384 max value counter counter
     reg [2:0] r_bit_idx = 0;
     reg [7:0] r_rx_byte = 0;
     reg r_rx_byte_rdy = 0;
-    reg [4:0] state = STATE_IDLE;
+    reg [4:0] r_state = STATE_IDLE;
 
     // double buffer to avoid metastbality issues
     always @(posedge i_clk)
@@ -34,7 +34,7 @@ module uart_rx
     // main state machine
     always @(posedge i_clk)
         begin
-            case (state)
+            case (r_state)
                 STATE_IDLE:
                     begin
                         r_rx_byte_rdy <= 1'b0;
@@ -42,9 +42,9 @@ module uart_rx
                         r_bit_idx = 0;
 
                         if (r_rx_data == 1'b0)
-                            state = STATE_START;
+                            r_state = STATE_START;
                         else
-                            state = STATE_IDLE;
+                            r_state = STATE_IDLE;
                     end
                 STATE_START:
                     begin
@@ -53,15 +53,15 @@ module uart_rx
                                 if (r_rx_data == 1'b0)
                                     begin
                                         r_count = 0;
-                                        state = STATE_DATA;
+                                        r_state = STATE_DATA;
                                     end
                                 else // bad start
-                                    state = STATE_IDLE;
+                                    r_state = STATE_IDLE;
                             end
                         else
                             begin
                                 r_count = r_count + 1;
-                                state = STATE_START;
+                                r_state = STATE_START;
                             end
                     end
                 STATE_DATA:
@@ -69,7 +69,7 @@ module uart_rx
                         if (r_count < (CLKS_PER_BIT-1))
                             begin
                                 r_count = r_count + 1;
-                                state = STATE_DATA;
+                                r_state = STATE_DATA;
                             end
                         else
                             begin
@@ -79,12 +79,12 @@ module uart_rx
                                 if (r_bit_idx < 7)
                                     begin
                                         r_bit_idx = r_bit_idx + 1;
-                                        state = STATE_DATA;
+                                        r_state = STATE_DATA;
                                     end
                                 else
                                     begin
                                         r_bit_idx = 0;
-                                        state = STATE_STOP;
+                                        r_state = STATE_STOP;
                                     end
                             end
                     end
@@ -93,23 +93,23 @@ module uart_rx
                         if (r_count < (CLKS_PER_BIT-1))
                             begin
                                 r_count = r_count + 1;
-                                state = STATE_STOP;
+                                r_state = STATE_STOP;
                             end
                         else
                             begin
                                 r_rx_byte_rdy = 1'b1;
                                 r_count = 0;
-                                state = STATE_RESET;
+                                r_state = STATE_RESET;
                             end
                     end
                 // the r_rx_byte_rdy will have been high for one clock.
                 STATE_RESET:
                     begin
-                        state = STATE_IDLE;
+                        r_state = STATE_IDLE;
                         r_rx_byte_rdy = 1'b0;
                     end
                 default:
-                    state <= STATE_IDLE;
+                    r_state <= STATE_IDLE;
             endcase
         end
 

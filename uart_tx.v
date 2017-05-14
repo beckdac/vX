@@ -7,7 +7,7 @@ module uart_tx
         input   i_tx_byte_rdy,
         input   [7:0] i_tx_byte,
         output  o_tx_busy,
-        output  o_tx,
+        output  reg o_tx,
         output  o_tx_done
     );
 
@@ -27,13 +27,13 @@ module uart_tx
                 STATE_IDLE:
                     begin
                         o_tx <= 1'b1;
-                        o_tx_done <= 1'b1;
+                        r_tx_done <= 1'b1;
                         r_count <= 0;
                         r_bit_idx <= 0;
 
                         if (i_tx_byte_rdy == 1'b1)
                             begin
-                                r_tx_active <= 1'b1';
+                                r_tx_busy <= 1'b1;
                                 r_tx_byte <= i_tx_byte;
                                 r_state <= STATE_START;
                             end
@@ -42,16 +42,16 @@ module uart_tx
                     end
                 STATE_START:
                     begin
-                        o_tx <= 1'b0
+                        o_tx <= 1'b0;
 
                         if (r_count < (CLKS_PER_BIT-1))
                             begin
-                                r_clock_count <= r_clock_count + 1;
-                                r_state <= STATE_START
+                                r_count <= r_count + 1;
+                                r_state <= STATE_START;
                             end
                         else
                             begin
-                                r_clock_count <= 0;
+                                r_count <= 0;
                                 r_state <= STATE_DATA;
                             end
                     end
@@ -62,7 +62,7 @@ module uart_tx
                         if (r_count < (CLKS_PER_BIT-1))
                             begin
                                 r_count <= r_count + 1;
-                                state <= STATE_DATA;
+                                r_state <= STATE_DATA;
                             end
                         else
                             begin
@@ -70,8 +70,8 @@ module uart_tx
 
                                 if (r_bit_idx < 7)
                                     begin
-                                        r_bit_idx <= r_bit_index + 1;
-                                        state <= STATE_DATA;
+                                        r_bit_idx <= r_bit_idx + 1;
+                                        r_state <= STATE_DATA;
                                     end
                                 else
                                     begin
@@ -108,7 +108,7 @@ module uart_tx
             endcase
         end
 
-    assign o_tx_busy <= r_tx_busy;
-    assign o_tx_done <= r_tx_done;
+    assign o_tx_busy = r_tx_busy;
+    assign o_tx_done = r_tx_done;
 
 endmodule // uart_tx
