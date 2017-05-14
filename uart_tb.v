@@ -1,7 +1,7 @@
 // uart testbench, rx and tx via loopback
 
 
-`timescale 1ns/10ns
+`timescale 10ns/10ns
 
 module uart_tb();
     localparam CLOCK_PERIOD_NS = 20, CLKS_PER_BIT = 434, BIT_PERIOD = 43400;
