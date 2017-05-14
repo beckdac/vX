@@ -21,11 +21,22 @@ module uart_tb();
             #(BIT_PERIOD);
             #1000
 
-            for (i=0; i < 8; i=i+1)
-                begin
-                    r_rx <= i_byte[i];
-                    #(BIT_PERIOD);
-                end
+            r_rx <= i_byte[0];
+            #(BIT_PERIOD);
+            r_rx <= i_byte[1];
+            #(BIT_PERIOD);
+            r_rx <= i_byte[2];
+            #(BIT_PERIOD);
+            r_rx <= i_byte[3];
+            #(BIT_PERIOD);
+            r_rx <= i_byte[4];
+            #(BIT_PERIOD);
+            r_rx <= i_byte[5];
+            #(BIT_PERIOD);
+            r_rx <= i_byte[6];
+            #(BIT_PERIOD);
+            r_rx <= i_byte[7];
+            #(BIT_PERIOD);
 
             r_rx <= 1'b1;
             #(BIT_PERIOD);
