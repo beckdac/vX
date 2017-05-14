@@ -37,8 +37,8 @@ module uart_tb();
             .i_clk(r_clk),
             .i_tx_byte_rdy(r_tx_byte_rdy),
             .i_tx_byte(r_tx_byte),
-            .o_tx_active(),
-            .o_tx_serial(),
+            .o_tx_busy(),
+            .o_tx(),
             .o_tx_done(w_tx_done)
         );
 
