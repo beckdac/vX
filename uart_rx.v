@@ -38,13 +38,13 @@ module uart_rx
                 STATE_IDLE:
                     begin
                         r_rx_byte_rdy <= 1'b0;
-                        r_count = 0;
-                        r_bit_idx = 0;
+                        r_count <= 0;
+                        r_bit_idx <= 0;
 
                         if (r_rx_data == 1'b0)
-                            r_state = STATE_START;
+                            r_state <= STATE_START;
                         else
-                            r_state = STATE_IDLE;
+                            r_state <= STATE_IDLE;
                     end
                 STATE_START:
                     begin
@@ -52,39 +52,39 @@ module uart_rx
                             begin
                                 if (r_rx_data == 1'b0)
                                     begin
-                                        r_count = 0;
-                                        r_state = STATE_DATA;
+                                        r_count <= 0;
+                                        r_state <= STATE_DATA;
                                     end
                                 else // bad start
-                                    r_state = STATE_IDLE;
+                                    r_state <= STATE_IDLE;
                             end
                         else
                             begin
-                                r_count = r_count + 1;
-                                r_state = STATE_START;
+                                r_count <= r_count + 1;
+                                r_state <= STATE_START;
                             end
                     end
                 STATE_DATA:
                     begin
                         if (r_count < (CLKS_PER_BIT-1))
                             begin
-                                r_count = r_count + 1;
-                                r_state = STATE_DATA;
+                                r_count <= r_count + 1;
+                                r_state <= STATE_DATA;
                             end
                         else
                             begin
-                                r_count = 0;
+                                r_count <= 0;
                                 r_rx_byte[r_bit_idx] <= r_rx_data;
 
                                 if (r_bit_idx < 7)
                                     begin
-                                        r_bit_idx = r_bit_idx + 1;
-                                        r_state = STATE_DATA;
+                                        r_bit_idx <= r_bit_idx + 1;
+                                        r_state <= STATE_DATA;
                                     end
                                 else
                                     begin
-                                        r_bit_idx = 0;
-                                        r_state = STATE_STOP;
+                                        r_bit_idx <= 0;
+                                        r_state <= STATE_STOP;
                                     end
                             end
                     end
@@ -92,21 +92,21 @@ module uart_rx
                     begin
                         if (r_count < (CLKS_PER_BIT-1))
                             begin
-                                r_count = r_count + 1;
-                                r_state = STATE_STOP;
+                                r_count <= r_count + 1;
+                                r_state <= STATE_STOP;
                             end
                         else
                             begin
-                                r_rx_byte_rdy = 1'b1;
-                                r_count = 0;
-                                r_state = STATE_RESET;
+                                r_rx_byte_rdy <= 1'b1;
+                                r_count <= 0;
+                                r_state <= STATE_RESET;
                             end
                     end
                 // the r_rx_byte_rdy will have been high for one clock.
                 STATE_RESET:
                     begin
-                        r_state = STATE_IDLE;
-                        r_rx_byte_rdy = 1'b0;
+                        r_state <= STATE_IDLE;
+                        r_rx_byte_rdy <= 1'b0;
                     end
                 default:
                     r_state <= STATE_IDLE;
