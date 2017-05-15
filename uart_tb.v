@@ -81,6 +81,8 @@ module uart_tb();
                 $display("tx/rx test passed");
             else
                 $display("tx/rx test failed");
+
+            $finish;
         end
 
 endmodule
