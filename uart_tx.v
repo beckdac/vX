@@ -17,7 +17,7 @@ module uart_tx
     reg [13:0] r_count = 0;             // 14 bit number is 16384 max value counter counter
     reg [2:0] r_bit_idx = 0;
     reg [7:0] r_tx_byte;
-    reg r_tx_done = 0;
+    reg r_tx_done = 1;
     reg r_tx_busy = 0;
     reg [4:0] r_state = STATE_IDLE;
 

@@ -11,11 +11,12 @@ module uart
         output wire o_tx_busy,
         output wire o_tx_done,
 
-        output wire o_rx_byte_rdy,        
-        output wire [7:0] o_rx_byte
+        //output wire o_rx_byte_rdy,        
+        output reg o_rx_byte_rdy = 0,
+		  output wire [7:0] o_rx_byte
     );
     // setup for 115200 baud at 50,000,000 Hz
-    localparam CLOCK_PERIOD_NS = 20, CLKS_PER_BIT = 434, BIT_PERIOD = 43400;
+    localparam CLOCK_PERIOD_NS = 20, CLKS_PER_BIT = 434, BIT_PERIOD = 434 * 20;
 
     uart_tx #(.CLKS_PER_BIT(CLKS_PER_BIT)) UART_TX_I1
         (
@@ -31,7 +32,8 @@ module uart
         (
             .i_clk(i_clk),
             .i_rx(i_rx),
-            .o_rx_byte_rdy(o_rx_byte_rdy),
+            //.o_rx_byte_rdy(o_rx_byte_rdy),
+				.o_rx_byte_rdy(),
             .o_rx_byte(o_rx_byte)
         );
 

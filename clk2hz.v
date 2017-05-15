@@ -12,12 +12,14 @@ module clk2hz
 
     always @(posedge i_clk)
         begin
-            if (r_1count < 65535)
+            //if (r_1count < 65535)
+            if (r_1count < 63000)
                 r_1count <= r_1count + 1;
             else
                 begin
                     r_1count = 0;
-                    if (r_2count < 255)
+                    //if (r_2count < 255)
+                    if (r_2count < 250)
                         r_2count <= r_2count + 1;
                         if (r_2count >= 127)
                             r_hz_clk <= 1'b1;
@@ -28,5 +30,7 @@ module clk2hz
                         end
                 end
         end
+
+    assign o_hz_clk = r_hz_clk;
 
 endmodule
