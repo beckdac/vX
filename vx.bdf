@@ -119,6 +119,7 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 576 328 624 344))
 )
 (symbol
 	(rect 128 272 352 416)
@@ -214,42 +215,6 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect -120 416 64 496)
-	(text "chargen" (rect 5 0 46 11)(font "Arial" ))
-	(text "inst1" (rect 8 64 32 75)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "i_clk" (rect 0 0 23 11)(font "Arial" ))
-		(text "i_clk" (rect 21 27 44 38)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "i_tx_rdy" (rect 0 0 40 11)(font "Arial" ))
-		(text "i_tx_rdy" (rect 21 43 61 54)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 184 32)
-		(output)
-		(text "o_char[7..0]" (rect 0 0 59 11)(font "Arial" ))
-		(text "o_char[7..0]" (rect 114 27 173 38)(font "Arial" ))
-		(line (pt 184 32)(pt 168 32)(line_width 3))
-	)
-	(port
-		(pt 184 48)
-		(output)
-		(text "o_char_rdy" (rect 0 0 56 11)(font "Arial" ))
-		(text "o_char_rdy" (rect 116 43 172 54)(font "Arial" ))
-		(line (pt 184 48)(pt 168 48))
-	)
-	(drawing
-		(rectangle (rect 16 16 168 64))
-	)
-)
-(symbol
 	(rect 400 336 448 368)
 	(text "NOT" (rect 1 0 22 10)(font "Arial" (font_size 6)))
 	(text "NOT_inst1" (rect 3 21 57 32)(font "Arial" ))
@@ -300,15 +265,6 @@ applicable agreement for further details.
 	)
 )
 (connector
-	(pt 88 336)
-	(pt 128 336)
-)
-(connector
-	(pt 104 352)
-	(pt 128 352)
-	(bus)
-)
-(connector
 	(pt 128 304)
 	(pt 120 304)
 )
@@ -325,71 +281,61 @@ applicable agreement for further details.
 	(pt 120 232)
 )
 (connector
-	(pt 104 352)
-	(pt 104 400)
-	(bus)
-)
-(connector
-	(pt 104 400)
-	(pt 64 400)
-	(bus)
-)
-(connector
-	(pt 64 400)
-	(pt 64 448)
-	(bus)
-)
-(connector
-	(pt 88 464)
-	(pt 88 336)
-)
-(connector
-	(pt 88 464)
-	(pt 64 464)
-)
-(connector
-	(pt -120 448)
-	(pt -120 256)
-)
-(connector
-	(pt -120 256)
-	(pt 120 256)
-)
-(connector
-	(pt 120 232)
-	(pt 120 256)
-)
-(connector
-	(pt 120 256)
-	(pt 120 304)
-)
-(connector
-	(pt -144 504)
-	(pt -144 464)
-)
-(connector
-	(pt -144 464)
-	(pt -120 464)
-)
-(connector
-	(pt 352 336)
-	(pt 376 336)
-)
-(connector
-	(pt 376 336)
-	(pt 376 504)
-)
-(connector
-	(pt -144 504)
-	(pt 376 504)
-)
-(connector
-	(pt 352 352)
-	(pt 400 352)
-)
-(connector
 	(pt 448 352)
 	(pt 464 352)
 )
+(connector
+	(pt 120 232)
+	(pt 120 304)
+)
+(connector
+	(pt 384 352)
+	(pt 384 456)
+)
+(connector
+	(pt 352 352)
+	(pt 384 352)
+)
+(connector
+	(pt 384 352)
+	(pt 400 352)
+)
+(connector
+	(pt 96 456)
+	(pt 96 336)
+)
+(connector
+	(pt 96 456)
+	(pt 384 456)
+)
+(connector
+	(pt 96 336)
+	(pt 128 336)
+)
+(connector
+	(pt 128 352)
+	(pt 120 352)
+	(bus)
+)
+(connector
+	(pt 120 352)
+	(pt 120 440)
+	(bus)
+)
+(connector
+	(pt 120 440)
+	(pt 360 440)
+	(bus)
+)
+(connector
+	(pt 360 440)
+	(pt 360 368)
+	(bus)
+)
+(connector
+	(pt 360 368)
+	(pt 352 368)
+	(bus)
+)
 (junction (pt 120 232))
-(junction (pt 120 256))
+(junction (pt 384 352))
