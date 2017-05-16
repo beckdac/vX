@@ -37,6 +37,7 @@ module uart_rx
             case (r_state)
                 STATE_IDLE:
                     begin
+								// next line commented out for testing
                         r_rx_byte_rdy <= 1'b0;
                         r_count <= 0;
                         r_bit_idx <= 0;
@@ -48,7 +49,10 @@ module uart_rx
                     end
                 STATE_START:
                     begin
-                        if (r_count == (CLKS_PER_BIT-1)/2)
+								// for testing
+								//r_rx_byte_rdy <= 1'b0;
+								//
+								if (r_count == (CLKS_PER_BIT-1)/2)
                             begin
                                 if (r_rx_data == 1'b0)
                                     begin
@@ -102,7 +106,6 @@ module uart_rx
                                 r_state <= STATE_RESET;
                             end
                     end
-                // the r_rx_byte_rdy will have been high for one clock.
                 STATE_RESET:
                     begin
                         r_state <= STATE_IDLE;

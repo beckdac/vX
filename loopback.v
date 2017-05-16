@@ -1,28 +1,22 @@
-module loopback 
-	(
-		input i_clk,
-		input wire i_tx_done,
-		input wire i_rx_byte_rdy,
-		input wire [7:0] i_rx_byte,
-		input wire i_fifo_full,
-		input wire i_fifo_empty,
-		input wire [7:0] i_fifo_q,
-		output wire [7:0] o_fifo_data,
-		output wire [7:0] o_tx_byte,
-		output wire o_tx_byte_rdy
-	);
-	
-	always @(posedge i_clk)
-		begin
-			if (!i_fifo_empty && i_tx_done)
-				begin
-					o_tx_byte <= 
-				end
-			if (!i_fifo_full && i_rx_byte_rdy)
-				begin
-					i_fifo_wrreq <= 1'b1
-					i_fifo_data <= i_rx_byte
-				end
-		end
-		
+module rxtester
+    (
+        input i_clk,
+        input i_rx_byte_rdy,
+        input [7:0] i_rx_byte,
+        output o_tx_byte_rdy,
+        output [7:0] o_tx_byte
+    );
+
+    reg r_tx_byte_rdy;
+    reg [7:0] r_tx_byte;
+    
+    always @(posedge i_rx_byte_rdy)
+        begin
+            r_tx_byte <= i_rx_byte;
+            r_tx_byte_rdy = i_rx_byte_rdy;
+        end
+
+    assign o_tx_byte_rdy = r_tx_byte_rdy;
+    assign o_tx_byte = r_tx_byte;
+    
 endmodule

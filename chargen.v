@@ -6,6 +6,7 @@ module chargen
 		output reg o_char_rdy = 0
 	);
 	
+	/*
 	always @(posedge i_clk)
 		begin
 			if (i_tx_rdy == 1)
@@ -19,5 +20,6 @@ module chargen
 			else
 				o_char_rdy = 0;
 		end
-
+	*/
+		
 endmodule	
