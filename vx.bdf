@@ -172,77 +172,6 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 128 272 352 416)
-	(text "uart" (rect 5 0 26 11)(font "Arial" ))
-	(text "UART" (rect 8 128 39 139)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "i_clk" (rect 0 0 23 11)(font "Arial" ))
-		(text "i_clk" (rect 21 27 44 38)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "i_rx" (rect 0 0 18 11)(font "Arial" ))
-		(text "i_rx" (rect 21 43 39 54)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "i_tx_byte_rdy" (rect 0 0 67 11)(font "Arial" ))
-		(text "i_tx_byte_rdy" (rect 21 59 88 70)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "i_tx_byte[7..0]" (rect 0 0 68 11)(font "Arial" ))
-		(text "i_tx_byte[7..0]" (rect 21 75 89 86)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 224 32)
-		(output)
-		(text "o_tx" (rect 0 0 22 11)(font "Arial" ))
-		(text "o_tx" (rect 185 27 207 38)(font "Arial" ))
-		(line (pt 224 32)(pt 208 32))
-	)
-	(port
-		(pt 224 48)
-		(output)
-		(text "o_tx_busy" (rect 0 0 51 11)(font "Arial" ))
-		(text "o_tx_busy" (rect 160 43 211 54)(font "Arial" ))
-		(line (pt 224 48)(pt 208 48))
-	)
-	(port
-		(pt 224 64)
-		(output)
-		(text "o_tx_done" (rect 0 0 53 11)(font "Arial" ))
-		(text "o_tx_done" (rect 159 59 212 70)(font "Arial" ))
-		(line (pt 224 64)(pt 208 64))
-	)
-	(port
-		(pt 224 80)
-		(output)
-		(text "o_rx_byte_rdy" (rect 0 0 71 11)(font "Arial" ))
-		(text "o_rx_byte_rdy" (rect 143 75 214 86)(font "Arial" ))
-		(line (pt 224 80)(pt 208 80))
-	)
-	(port
-		(pt 224 96)
-		(output)
-		(text "o_rx_byte[7..0]" (rect 0 0 73 11)(font "Arial" ))
-		(text "o_rx_byte[7..0]" (rect 142 91 215 102)(font "Arial" ))
-		(line (pt 224 96)(pt 208 96)(line_width 3))
-	)
-	(drawing
-		(rectangle (rect 16 16 208 128))
-	)
-)
-(symbol
 	(rect 128 96 280 176)
 	(text "status" (rect 5 0 35 11)(font "Arial" ))
 	(text "STATUS" (rect 8 64 52 75)(font "Arial" ))
@@ -307,6 +236,70 @@ applicable agreement for further details.
 		(rectangle (rect 16 16 208 96))
 	)
 )
+(symbol
+	(rect 128 272 352 384)
+	(text "uart" (rect 5 0 26 11)(font "Arial" ))
+	(text "inst1" (rect 8 96 32 107)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "i_clk" (rect 0 0 23 11)(font "Arial" ))
+		(text "i_clk" (rect 21 27 44 38)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "i_rx" (rect 0 0 18 11)(font "Arial" ))
+		(text "i_rx" (rect 21 43 39 54)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "i_tx_byte_rdy" (rect 0 0 67 11)(font "Arial" ))
+		(text "i_tx_byte_rdy" (rect 21 59 88 70)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "i_tx_byte[7..0]" (rect 0 0 68 11)(font "Arial" ))
+		(text "i_tx_byte[7..0]" (rect 21 75 89 86)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 224 32)
+		(output)
+		(text "o_tx" (rect 0 0 22 11)(font "Arial" ))
+		(text "o_tx" (rect 185 27 207 38)(font "Arial" ))
+		(line (pt 224 32)(pt 208 32))
+	)
+	(port
+		(pt 224 48)
+		(output)
+		(text "o_tx_busy" (rect 0 0 51 11)(font "Arial" ))
+		(text "o_tx_busy" (rect 160 43 211 54)(font "Arial" ))
+		(line (pt 224 48)(pt 208 48))
+	)
+	(port
+		(pt 224 64)
+		(output)
+		(text "o_rx_byte_rdy" (rect 0 0 71 11)(font "Arial" ))
+		(text "o_rx_byte_rdy" (rect 143 59 214 70)(font "Arial" ))
+		(line (pt 224 64)(pt 208 64))
+	)
+	(port
+		(pt 224 80)
+		(output)
+		(text "o_rx_byte[7..0]" (rect 0 0 73 11)(font "Arial" ))
+		(text "o_rx_byte[7..0]" (rect 142 75 215 86)(font "Arial" ))
+		(line (pt 224 80)(pt 208 80)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 208 96))
+	)
+)
 (connector
 	(pt 128 304)
 	(pt 120 304)
@@ -340,16 +333,6 @@ applicable agreement for further details.
 (connector
 	(pt 128 352)
 	(pt 104 352)
-	(bus)
-)
-(connector
-	(pt 352 368)
-	(pt 368 368)
-	(bus)
-)
-(connector
-	(pt 368 368)
-	(pt 368 480)
 	(bus)
 )
 (connector
@@ -392,10 +375,6 @@ applicable agreement for further details.
 	(pt 400 408)
 )
 (connector
-	(pt 384 352)
-	(pt 384 408)
-)
-(connector
 	(pt 352 320)
 	(pt 400 320)
 )
@@ -412,24 +391,8 @@ applicable agreement for further details.
 	(pt 384 496)
 )
 (connector
-	(pt 384 408)
-	(pt 384 496)
-)
-(connector
-	(pt 352 352)
-	(pt 384 352)
-)
-(connector
 	(pt 80 392)
 	(pt 80 336)
-)
-(connector
-	(pt 80 336)
-	(pt 128 336)
-)
-(connector
-	(pt 128 336)
-	(pt 152 336)
 )
 (connector
 	(pt 400 320)
@@ -447,7 +410,32 @@ applicable agreement for further details.
 	(pt 480 360)
 	(pt 504 360)
 )
+(connector
+	(pt 80 336)
+	(pt 128 336)
+)
+(connector
+	(pt 384 408)
+	(pt 384 496)
+)
+(connector
+	(pt 352 352)
+	(pt 368 352)
+	(bus)
+)
+(connector
+	(pt 368 352)
+	(pt 368 480)
+	(bus)
+)
+(connector
+	(pt 352 336)
+	(pt 384 336)
+)
+(connector
+	(pt 384 336)
+	(pt 384 408)
+)
 (junction (pt 120 232))
 (junction (pt 120 272))
 (junction (pt 384 408))
-(junction (pt 128 336))

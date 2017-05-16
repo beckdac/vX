@@ -7,8 +7,7 @@ module uart_tx
         input   i_tx_byte_rdy,
         input   [7:0] i_tx_byte,
         output  o_tx_busy,
-        output  reg o_tx,
-        output  o_tx_done
+        output  reg o_tx
     );
 
     localparam  STATE_IDLE=5'b00001, STATE_START=5'b00010, STATE_DATA=5'b00100,
@@ -17,7 +16,6 @@ module uart_tx
     reg [13:0] r_count = 0;             // 14 bit number is 16384 max value counter counter
     reg [2:0] r_bit_idx = 0;
     reg [7:0] r_tx_byte;
-    reg r_tx_done = 1;
     reg r_tx_busy = 0;
     reg [4:0] r_state = STATE_IDLE;
 
@@ -27,14 +25,12 @@ module uart_tx
                 STATE_IDLE:
                     begin
                         o_tx <= 1'b1;
-                        r_tx_done <= 1'b1;
                         r_count <= 0;
                         r_bit_idx <= 0;
 
                         if (i_tx_byte_rdy == 1'b1)
                             begin
                                 r_tx_busy <= 1'b1;
-                                r_tx_done <= 1'b0;
                                 r_tx_byte <= i_tx_byte;
                                 r_state <= STATE_START;
                             end
@@ -98,7 +94,6 @@ module uart_tx
                     end
                 STATE_RESET:
                     begin
-                        r_tx_done <= 1'b1;
                         r_tx_busy <= 1'b0;
                         r_state <= STATE_IDLE;
                     end
@@ -109,6 +104,5 @@ module uart_tx
         end
 
     assign o_tx_busy = r_tx_busy;
-    assign o_tx_done = r_tx_done;
 
 endmodule // uart_tx
