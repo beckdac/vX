@@ -1,4 +1,4 @@
-module rxtester
+module loopback
     (
         input i_clk,
         input i_rx_byte_rdy,
@@ -10,7 +10,7 @@ module rxtester
     reg r_tx_byte_rdy;
     reg [7:0] r_tx_byte;
     
-    always @(posedge i_rx_byte_rdy)
+    always @(i_rx_byte_rdy)
         begin
             r_tx_byte <= i_rx_byte;
             r_tx_byte_rdy = i_rx_byte_rdy;
